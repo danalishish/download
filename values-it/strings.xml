@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="mainactivity_url_label_text">URL da scaricare</string>
+	<string name="mainactivity_url_hint">http:// o https://</string>
+	<string name="mainactivity_file_label_text">Salva in questo file</string>
+	<string name="mainactivity_file_hint">Percorso del file</string>
+	<string name="mainactivity_verify_text">Verifica URL</string>
+	<string name="mainactivity_download_text">Scarica</string>
+
+	<string name="error">Errore</string>
+	<string name="error_missing_url">URL mancante</string>
+	<string name="error_malformed_url">URL non corretto</string>
+	<string name="error_bad_protocol">URL deve iniziare con http: o https:</string>
+	<string name="error_missing_path">Percorso mancante</string>
+	<string name="error_not_a_file">Non &#232; un file</string>
+	<string name="error_readonly_file">Non posso scrivere su questo file</string>
+	<string name="error_cannot_create_file">Non posso creare il file</string>
+	<string name="error_bad_path">Percorso non corretto</string>
+
+	<string name="file_already_exists">Il file esiste gi&#224;</string>
+	<string name="replace_its_content">Sostituire il suo contenuto?</string>
+
+	<string name="total_size">Dimensione totale</string>
+	<string name="unknown">Sconosciuta</string>
+	<string name="downloaded_size">Quantit&#224; scaricata</string>
+	<string name="downloaded_perc">% scaricata</string>
+
+	<string name="download_cancelled">Download annullato</string>
+	<string name="download_finished">Download terminato</string>
+	<string name="touch_to_open">Tocca qui per aprire il file</string>
+	<string name="no_app_can_open">Nessuna applicazione pu&#242; aprire il file</string>
+</resources>
