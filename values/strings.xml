@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_label">Download</string>
+
+	<string name="mainactivity_url_label_text">URL to download</string>
+	<string name="mainactivity_url_hint">http:// or https://</string>
+	<string name="mainactivity_file_label_text">Save to this file</string>
+	<string name="mainactivity_file_hint">Path of the file</string>
+	<string name="mainactivity_verify_text">Verify URL</string>
+	<string name="mainactivity_download_text">Download</string>
+
+	<string name="error">Error</string>
+	<string name="error_missing_url">Missing URL</string>
+	<string name="error_malformed_url">Incorrect URL</string>
+	<string name="error_bad_protocol">URL must start with http: or https:</string>
+	<string name="error_missing_path">Missing path</string>
+	<string name="error_not_a_file">It is not a file</string>
+	<string name="error_readonly_file">Cannot write to this file</string>
+	<string name="error_cannot_create_file">Cannot create the file</string>
+	<string name="error_bad_path">Incorrect path</string>
+
+	<string name="file_already_exists">File already exists</string>
+	<string name="replace_its_content">Replace its content?</string>
+
+	<string name="total_size">Total size</string>
+	<string name="unknown">Unknown</string>
+	<string name="downloaded_size">Downloaded size</string>
+	<string name="downloaded_perc">Downloaded %</string>
+
+	<string name="download_cancelled">Download cancelled</string>
+	<string name="download_finished">Download finished</string>
+	<string name="touch_to_open">Touch here to open the file</string>
+	<string name="no_app_can_open">No application can open the file</string>
+</resources>
