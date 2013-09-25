@@ -26,6 +26,7 @@
 	<string name="unknown">Unknown</string>
 	<string name="downloaded_size">Downloaded size</string>
 	<string name="downloaded_perc">Downloaded %</string>
+	<string name="speed">Speed</string>
 
 	<string name="download_cancelled">Download cancelled</string>
 	<string name="download_finished">Download finished</string>
