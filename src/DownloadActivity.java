@@ -17,7 +17,8 @@ public class DownloadActivity extends MyListActivity
 	static final String INTENT_EXTRA_PATH = "path";
 
 	DownloadTask download_task;
-	int seconds = 0;
+	int seconds = 0,
+		previous_downloaded_size = 0; // for calculating speed
 	boolean download_finished = false;
 
 	public void onCreate(Bundle savedInstanceState)
@@ -30,6 +31,7 @@ public class DownloadActivity extends MyListActivity
 				addListItem(getString(R.string.total_size), "");
 				addListItem(getString(R.string.downloaded_size), "");
 				addListItem(getString(R.string.downloaded_perc), "");
+				addListItem(getString(R.string.speed), "");
 				simple_adapter.notifyDataSetChanged();
 			}
 
@@ -106,6 +108,11 @@ public class DownloadActivity extends MyListActivity
 			int percentage = values[1] * 100 / values[0];
 			list.get(2).put(TEXT2, String.format("%d%%", percentage));
 		}
+
+		int bytes_per_second = values[1] - previous_downloaded_size;
+		previous_downloaded_size = values[1];
+		list.get(3).put(TEXT2, Formatter.formatShortFileSize(this, bytes_per_second) + "/s");
+
 		simple_adapter.notifyDataSetChanged();
 	}
 
@@ -120,7 +127,7 @@ public class DownloadActivity extends MyListActivity
 
 	public void onListItemClick(ListView l, View v, int position, long id)
 	{
-		if(position == 3 && download_finished)
+		if(position == 4 && download_finished)
 		{
 			try
 			{
