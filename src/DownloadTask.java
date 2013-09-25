@@ -13,10 +13,14 @@ public class DownloadTask extends AsyncTask<HttpURLConnection, Integer, String>
 	static final int BUFFER_SIZE = 1024;
 
 	HttpURLConnection connection;
-	boolean connected = false;
+	boolean connected = false,
+		input_stream_opened = false,
+		output_stream_opened = false;
 	String file_path = null; // set by DownloadActivity
 	int total_size = 0, downloaded_size = 0, num_of_bytes_read = 0;
 	Timer timer;
+	BufferedInputStream input_stream;
+	BufferedOutputStream output_stream;
 
 	public String doInBackground(HttpURLConnection... params)
 	{
@@ -28,12 +32,15 @@ public class DownloadTask extends AsyncTask<HttpURLConnection, Integer, String>
 			connected = true;
 			total_size = connection.getContentLength();
 
-			BufferedInputStream input_stream = new BufferedInputStream(
+			input_stream = new BufferedInputStream(
 				connection.getInputStream()
 			);
-			BufferedOutputStream output_stream = new BufferedOutputStream(
+			input_stream_opened = true;
+			output_stream = new BufferedOutputStream(
 				new FileOutputStream(file_path)
 			);
+			output_stream_opened = true;
+
 			byte[] buffer = new byte[BUFFER_SIZE];
 
 			timer.schedule(
@@ -61,14 +68,18 @@ public class DownloadTask extends AsyncTask<HttpURLConnection, Integer, String>
 			}
 			while(num_of_bytes_read >= 0);
 
-			input_stream.close();
-			output_stream.flush();
-			output_stream.close();
+			total_size = downloaded_size;
+
+			/* don't stop the timer because I need to show the final values:
+			   stopping will be done in DownloadActivity
+			*/
+			cleanUp();
 			return null; // ok
 		}
 		catch(Exception e)
 		{
 			timer.cancel();
+			cleanUp();
 			return e.getMessage();
 		}
 	}
@@ -83,10 +94,24 @@ public class DownloadTask extends AsyncTask<HttpURLConnection, Integer, String>
 
 	public void onCancelled()
 	{
-		if(connected)
+		timer.cancel();
+		cleanUp();
+	}
+
+	public void cleanUp()
+	{
+		try
 		{
-			timer.cancel();
-			connection.disconnect();
+			if(output_stream_opened)
+			{
+				output_stream.flush();
+				output_stream.close();
+			}
+			if(input_stream_opened) input_stream.close();
+			if(connected) connection.disconnect();
+		}
+		catch(Exception e)
+		{
 		}
 	}
 }
