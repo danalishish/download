@@ -131,16 +131,14 @@ public class DownloadActivity extends MyListActivity
 		{
 			try
 			{
-				int dot_pos = download_task.file_path.lastIndexOf('.');
-				String file_extension = null;
-				if(dot_pos != -1 && !download_task.file_path.endsWith("."))
-					file_extension = download_task.file_path.substring(dot_pos + 1);
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				File f = new File(download_task.file_path);
+				Uri file_uri = Uri.fromFile(f);
 				String mime_type = MimeTypeMap
 					.getSingleton()
-					.getMimeTypeFromExtension(file_extension);
-
-				Intent intent = new Intent(Intent.ACTION_VIEW);
-				Uri file_uri = Uri.fromFile(new File(download_task.file_path));
+					.getMimeTypeFromExtension(
+						MimeTypeMap.getFileExtensionFromUrl(f.toURL().toString())
+					);
 				if(mime_type != null)
 					intent.setDataAndType(file_uri, mime_type);
 				else
